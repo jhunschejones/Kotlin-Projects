@@ -1,0 +1,29 @@
+plugins {
+    id 'java'
+    id 'org.jetbrains.kotlin.jvm' version '1.4.10'
+}
+
+group 'com.joshuahunschejones'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    implementation "ch.qos.logback:logback-classic:${project['slf4j.version']}"
+    implementation "io.ktor:ktor-server-core:${project['ktor.version']}"
+    implementation "io.ktor:ktor-server-netty:${project['ktor.version']}"
+    implementation "io.ktor:ktor-jackson:${project['ktor.version']}"
+    implementation "org.jetbrains.exposed:exposed:${project['exposed.version']}"
+    implementation "org.postgresql:postgresql:${project['postgresql.version']}"
+    testImplementation "io.ktor:ktor-server-test-host:${project['ktor.version']}"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:${project['junit.version']}"
+    testRuntime "org.junit.jupiter:junit-jupiter-engine:${project['junit.version']}"
+}
+
+test {
+    useJUnitPlatform()
+}
