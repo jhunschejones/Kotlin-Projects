@@ -1,5 +1,5 @@
-import cats.CatService
 import cats.CatServiceDB
+import cats.Cats
 import cats.catRouter
 import com.fasterxml.jackson.databind.SerializationFeature
 import io.ktor.application.*
@@ -9,7 +9,7 @@ import io.ktor.response.*
 import io.ktor.routing.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
-import org.jetbrains.exposed.sql.*
+import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.transactions.transaction
 
 fun main() {
@@ -37,18 +37,8 @@ fun Application.mainModule() {
 }
 
 private fun setUpDatabase() {
-    val dbHost = "localhost"
-    val dbPort = 5432
-    val dbName = "cats_hostel_development"
-    val dbUser = "cats_hostel_development_user"
-    val dbPassword = "very_secret"
-    val db = Database.connect(
-        "jdbc:postgresql://$dbHost:$dbPort/$dbName",
-        driver = "org.postgresql.Driver",
-        user = dbUser,
-        password = dbPassword
-    )
 
+    DB.connect()
     transaction {
         SchemaUtils.create(Cats)
     }
